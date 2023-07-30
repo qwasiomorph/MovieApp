@@ -258,11 +258,40 @@ h6 {
   border: 1px solid #e90000;
   border-radius: 50%;
   transition: background-color 1s ease-in-out;
+  position: relative;
+}
+
+.buttonDelete::before,
+.buttonDelete::after {
+  position: absolute;
+  top: 13.5px;
+  left: 4px;
+  display: block;
+  content: "";
+  width: 75%;
+  height: 4px;
+  background-color: #fff;
+  transform: rotate(45deg);
+  transition: background-color 1s ease-in-out;
+}
+
+.buttonDelete::after {
+  transform: rotate(135deg);
 }
 
 .buttonDelete:hover,
 :focus {
   background-color: #fff;
+}
+
+.buttonDelete:hover::before,
+.buttonDelete:hover::after {
+  background-color: #e90000;
+}
+
+.buttonDelete:focus:before,
+.buttonDelete:focus::after {
+  background-color: #e90000;
 }
 
 /* MOVIE CARD */
