@@ -50,7 +50,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 ul {
@@ -132,6 +132,17 @@ h6 {
   font-size: 1rem;
 }
 
+.errorWrapper {
+  padding: 1em;
+}
+
+.spinnerWrapper {
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* MOVIE CARD */
 
 .movie {
@@ -139,6 +150,8 @@ h6 {
   box-shadow: 0px 4px 12px 0px #00000026;
   position: relative;
   height: 20em;
+  display: flex;
+  flex-flow: column;
 }
 
 .movie__posterAndName {
@@ -149,10 +162,20 @@ h6 {
   padding-left: 0.75em;
 }
 
+.movie__name {
+  padding-right: 2.5em;
+}
+
 .movie__poster {
   width: 60px;
   height: 90px;
-  border: 1px solid #111111;
+  /* border: 1px solid #111111; */
+}
+
+.posterImage {
+  width: 60px;
+  height: 90px;
+  object-fit: cover;
 }
 
 .movie__releaseDate {
@@ -163,6 +186,7 @@ h6 {
 
 .genres {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -186,23 +210,59 @@ h6 {
   font-size: 12px;
   width: 30px;
   height: 30px;
-  border: 2px solid #e9d100;
+
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.movie__stars {
-  position: absolute;
-  right: 1em;
-  bottom: 1em;
-  display: flex;
-  gap: 0.5em;
+.score-vlow {
+  border: 2px solid #e90000;
+}
+
+.score-low {
+  border: 2px solid #e97e00;
+}
+
+.score-mid {
+  border: 2px solid #e9d100;
+}
+
+.score-high {
+  border: 2px solid #66e900;
 }
 
 .attribution {
   position: absolute;
+}
+
+.userRateWrapper {
+  padding: 1em;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+}
+
+.delete-wrap {
+  padding: 0 0.5em;
+  display: flex;
+  align-items: center;
+}
+
+.buttonDelete {
+  height: 2em;
+  width: 2em;
+  background-color: #e90000;
+  border: 1px solid #e90000;
+  border-radius: 50%;
+  transition: background-color 1s ease-in-out;
+}
+
+.buttonDelete:hover,
+:focus {
+  background-color: #fff;
 }
 
 /* MOVIE CARD */
@@ -245,4 +305,23 @@ h6 {
 
 .left {
   transform: rotate(180deg);
+}
+
+@media (min-width: 768px) {
+  body {
+    margin: 0 13em;
+    max-width: 100%;
+  }
+
+  .inputWrap {
+    padding-top: 1em;
+  }
+
+  .movieList {
+    padding-top: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2em;
+    row-gap: 2em;
+  }
 }
