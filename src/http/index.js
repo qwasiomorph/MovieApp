@@ -1,6 +1,6 @@
 export default class MovieAPI {
   constructor() {
-    this.baseURL = import.meta.env.VITE_BASE_URL;
+    this.baseURL = import.meta.env.VITE_BASE_API_URL;
     this.token = import.meta.env.VITE_MOVIEAPI_TOKEN;
   }
 
@@ -41,7 +41,7 @@ export default class MovieAPI {
   static searchGenres = (lang) => {
     const result = new Map();
     let request = `${
-      import.meta.env.VITE_BASE_URL
+      import.meta.env.VITE_BASE_API_URL
     }genre/movie/list?language=${lang}`;
     const res = fetch(request, {
       headers: {
