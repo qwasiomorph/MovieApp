@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 import Search from "./Search";
 import MovieList from "./MovieList";
-import MovieAPI from "../http";
+import MovieAPI from "../services";
 import parseList from "../utils/parseApiData";
 import PaginationWrap from "./PaginationWrap";
 import { Provider } from "../context/movieApiContext";
@@ -73,6 +73,7 @@ export default class App extends Component {
         searchRated: !searchRated,
         movies: [],
         errorMsg: "",
+        totalItems: 0,
       };
     });
   };
@@ -163,9 +164,13 @@ export default class App extends Component {
 
   componentDidMount() {
     if (!this.genresMap) {
-      MovieAPI.searchGenres("en").then((genresMap) => {
-        this.genresMap = genresMap;
-      });
+      MovieAPI.searchGenres("en")
+        .then((genresMap) => {
+          this.genresMap = genresMap;
+        })
+        .catch(() => {
+          this.setState({ errorMsg: new Error("Failed to access the API") });
+        });
     }
   }
 

@@ -1,9 +1,7 @@
-import React from "react";
-
-import months from "../utils/months";
-import sliceDesc from "../utils/descriptionSlice";
-import UserRate from "./UserRate";
-import { Consumer } from "../context/movieApiContext";
+import months from "../../utils/months";
+import sliceDesc from "../../utils/descriptionSlice";
+import UserRate from "../UserRate";
+import { Consumer } from "../../context/movieApiContext";
 
 import PropTypes from "prop-types";
 
@@ -25,7 +23,7 @@ const MovieCard = ({
           <img
             className="posterImage"
             src={import.meta.env.VITE_IMAGE_BASE_URL + img}
-            alt={"poster"}
+            alt={`${name} poster`}
           />
         </div>
         <div className="movie__nameAndDate">

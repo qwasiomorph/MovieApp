@@ -1,11 +1,11 @@
-import React from "react";
+import MovieCard from "../MovieCard";
+import AlertComponent from "../Alert";
+import Spinner from "../Spinner";
 
-import MovieCard from "./MovieCard";
-import AlertComponent from "./Alert";
-import Spinner from "./Spinner";
+import PropTypes from "prop-types";
 
 const MovieList = ({ errorMsg, isLoading, movies, rateMovie, unRateMovie }) => {
-  if (!!errorMsg) {
+  if (errorMsg) {
     return (
       <div className="errorWrapper">
         <AlertComponent errorMsg={errorMsg} />
@@ -38,6 +38,22 @@ const MovieList = ({ errorMsg, isLoading, movies, rateMovie, unRateMovie }) => {
       )}
     </>
   );
+};
+
+MovieList.defaultProps = {
+  errorMsg: new Error("Unexpected error"),
+  isLoading: false,
+  movies: [],
+  rateMovie: () => {},
+  unRateMovie: () => {},
+};
+
+MovieList.propTypes = {
+  errorMsg: PropTypes.object,
+  isLoading: PropTypes.bool,
+  movies: PropTypes.array,
+  rateMovie: PropTypes.func,
+  unRateMovie: PropTypes.func,
 };
 
 export default MovieList;

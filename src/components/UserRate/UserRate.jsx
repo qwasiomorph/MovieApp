@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import star from "../assets/star.svg";
-import starEmpty from "../assets/starEmpty.svg";
-import getNewRating from "../utils/getNewRating";
+import { Component } from 'react';
+import star from '../../assets/star.svg';
+import starEmpty from '../../assets/starEmpty.svg';
+import getNewRating from '../../utils/getNewRating';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 export default class UserRate extends Component {
   state = {
@@ -31,7 +31,7 @@ export default class UserRate extends Component {
   };
   getSavedRate = () => {
     let id = this.props.id;
-    let ratings = localStorage.getItem("UserMovieRating");
+    let ratings = localStorage.getItem('UserMovieRating');
     if (!ratings) {
       return;
     }
@@ -72,11 +72,12 @@ export default class UserRate extends Component {
   render() {
     return (
       <div className="userRateWrapper">
-        <div
-          className="rating-wrap"
-          onMouseOut={this.handleMouseOut}
-          onClick={this.handleRatingSubmit}
-        >
+        <div className={`delete-wrap${!this.state.fromStorage ? ' hidden' : ''}`}>
+          <button type="button" onClick={this.handleRatingDelete} className={'buttonDelete'}>
+            Cancel
+          </button>
+        </div>
+        <div className="rating-wrap" onMouseOut={this.handleMouseOut} onClick={this.handleRatingSubmit}>
           {this.state.rating.map((rate, index) => (
             <img
               key={index}
@@ -89,20 +90,12 @@ export default class UserRate extends Component {
             />
           ))}
         </div>
-        <div
-          className={`delete-wrap${!this.state.fromStorage ? " hidden" : ""}`}
-        >
-          <button
-            onClick={this.handleRatingDelete}
-            className={"buttonDelete"}
-          ></button>
-        </div>
       </div>
     );
   }
 
   static defaultProps = {
-    id: "",
+    id: '',
     rateMovie: () => {},
     unRateMovie: () => {},
   };

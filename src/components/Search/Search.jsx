@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import debounce from "lodash.debounce";
 
 import PropTypes from "prop-types";
@@ -13,6 +13,9 @@ class Search extends Component {
   }
 
   handleRadio = () => {
+    this.setState({
+      searchValue: "",
+    });
     this.props.toggleRatedList();
   };
 

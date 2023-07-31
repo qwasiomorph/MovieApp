@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 html,
 body {
@@ -33,7 +33,7 @@ button::-moz-focus-inner {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1.4em;
   background: #fff;
   color: #111111;
@@ -252,46 +252,19 @@ h6 {
 }
 
 .buttonDelete {
-  height: 2em;
-  width: 2em;
+  padding: 0.5em 1em;
   background-color: #e90000;
   border: 1px solid #e90000;
-  border-radius: 50%;
-  transition: background-color 1s ease-in-out;
+  border-radius: 4px;
   position: relative;
-}
-
-.buttonDelete::before,
-.buttonDelete::after {
-  position: absolute;
-  top: 13.5px;
-  left: 4px;
-  display: block;
-  content: "";
-  width: 75%;
-  height: 4px;
-  background-color: #fff;
-  transform: rotate(45deg);
-  transition: background-color 1s ease-in-out;
-}
-
-.buttonDelete::after {
-  transform: rotate(135deg);
+  color: #fff;
+  transition: all 1s ease-in-out;
 }
 
 .buttonDelete:hover,
-:focus {
+.buttonDelete:focus {
   background-color: #fff;
-}
-
-.buttonDelete:hover::before,
-.buttonDelete:hover::after {
-  background-color: #e90000;
-}
-
-.buttonDelete:focus:before,
-.buttonDelete:focus::after {
-  background-color: #e90000;
+  color: #e90000;
 }
 
 /* MOVIE CARD */
@@ -329,7 +302,7 @@ h6 {
 .arrow {
   width: 22px;
   height: 22px;
-  background: url("src/assets/arrow.svg") no-repeat center center;
+  background: url('src/assets/arrow.svg') no-repeat center center;
 }
 
 .left {
