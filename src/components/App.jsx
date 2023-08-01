@@ -1,19 +1,19 @@
-import { Component } from "react";
+import { Component } from 'react';
 
-import Search from "./Search";
-import MovieList from "./MovieList";
-import MovieAPI from "../services";
-import parseList from "../utils/parseApiData";
-import PaginationWrap from "./PaginationWrap";
-import { Provider } from "../context/movieApiContext";
+import Search from './Search';
+import MovieList from './MovieList';
+import MovieAPI from '../services';
+import parseList from '../utils/parseApiData';
+import PaginationWrap from './PaginationWrap';
+import { Provider } from '../context/movieApiContext';
 
-export default class App extends Component {
+class App extends Component {
   state = {
     api: new MovieAPI(),
     movies: [],
     isLoading: false,
-    errorMsg: "",
-    lastQuery: "",
+    errorMsg: '',
+    lastQuery: '',
     totalItems: 0,
     searchRated: true,
   };
@@ -34,7 +34,7 @@ export default class App extends Component {
       }
       this.setState({
         movies: list,
-        errorMsg: "",
+        errorMsg: '',
         totalItems: resultsAmount,
       });
     } catch (error) {
@@ -51,14 +51,11 @@ export default class App extends Component {
     }
     try {
       this.setState({ isLoading: true });
-      const data = await this.state.api.searchMovie(
-        this.state.lastQuery,
-        pageNum
-      );
+      const data = await this.state.api.searchMovie(this.state.lastQuery, pageNum);
       let list = parseList(data.results);
       this.setState({
         movies: list,
-        errorMsg: "",
+        errorMsg: '',
       });
     } catch (err) {
       this.setState({ errorMsg: err });
@@ -72,25 +69,20 @@ export default class App extends Component {
       return {
         searchRated: !searchRated,
         movies: [],
-        errorMsg: "",
+        errorMsg: '',
         totalItems: 0,
       };
     });
   };
 
   componentDidUpdate() {
-    if (
-      !this.state.searchRated &&
-      !this.state.isLoading &&
-      !this.state.movies.length &&
-      !this.state.errorMsg
-    ) {
+    if (!this.state.searchRated && !this.state.isLoading && !this.state.movies.length && !this.state.errorMsg) {
       this.loadRatedMovies();
     }
   }
 
   loadRatedMovies = async (page) => {
-    let ratings = localStorage.getItem("UserMovieRating");
+    let ratings = localStorage.getItem('UserMovieRating');
     try {
       if (!ratings) {
         throw new Error("Apparantly, you haven't rated any movies.");
@@ -112,7 +104,7 @@ export default class App extends Component {
       }
       this.setState({
         movies: list,
-        errorMsg: "",
+        errorMsg: '',
         totalItems: keys.length,
       });
     } catch (err) {
@@ -123,16 +115,16 @@ export default class App extends Component {
   };
 
   rateMovie = (id, rating) => {
-    let ratings = localStorage.getItem("UserMovieRating");
+    let ratings = localStorage.getItem('UserMovieRating');
     if (!ratings) {
       ratings = {
         [id]: rating,
       };
-      localStorage.setItem("UserMovieRating", JSON.stringify(ratings));
+      localStorage.setItem('UserMovieRating', JSON.stringify(ratings));
     } else {
       ratings = JSON.parse(ratings);
       ratings[id] = rating;
-      localStorage.setItem("UserMovieRating", JSON.stringify(ratings));
+      localStorage.setItem('UserMovieRating', JSON.stringify(ratings));
     }
   };
 
@@ -144,7 +136,7 @@ export default class App extends Component {
         return { movies: newMovieList, totalItems: newTotalItems };
       });
     }
-    let ratings = localStorage.getItem("UserMovieRating");
+    let ratings = localStorage.getItem('UserMovieRating');
     if (!ratings) {
       return;
     }
@@ -152,24 +144,24 @@ export default class App extends Component {
     let newRatings = {};
     if (ratings[id]) {
       if (Object.keys(ratings).length === 1) {
-        localStorage.removeItem("UserMovieRating");
+        localStorage.removeItem('UserMovieRating');
         return;
       }
       for (let key in ratings) {
         if (key != id) newRatings[key] = ratings[key];
       }
-      localStorage.setItem("UserMovieRating", JSON.stringify(newRatings));
+      localStorage.setItem('UserMovieRating', JSON.stringify(newRatings));
     }
   };
 
   componentDidMount() {
     if (!this.genresMap) {
-      MovieAPI.searchGenres("en")
+      MovieAPI.searchGenres('en')
         .then((genresMap) => {
           this.genresMap = genresMap;
         })
         .catch(() => {
-          this.setState({ errorMsg: new Error("Failed to access the API") });
+          this.setState({ errorMsg: new Error('Failed to access the API') });
         });
     }
   }
@@ -205,3 +197,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default App;

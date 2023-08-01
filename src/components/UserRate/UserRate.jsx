@@ -5,7 +5,7 @@ import getNewRating from '../../utils/getNewRating';
 
 import PropTypes from 'prop-types';
 
-export default class UserRate extends Component {
+class UserRate extends Component {
   state = {
     rating: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     fromStorage: false,
@@ -106,3 +106,5 @@ export default class UserRate extends Component {
     unRateMovie: PropTypes.func,
   };
 }
+
+export default UserRate;
